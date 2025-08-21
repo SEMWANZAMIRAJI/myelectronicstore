@@ -97,6 +97,6 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('product_list')
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.username != 'nuhu':
-            return HttpResponseForbidden("Only seller 'nuhu' can create products.")
+        if request.user.username != 'Nuhuu':
+            return HttpResponseForbidden("Only seller 'nuhuu' can create products.")
         return super().dispatch(request, *args, **kwargs)
