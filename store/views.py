@@ -32,6 +32,7 @@ class AddToCartView(View):
             # Ensure cart is a dictionary
             if not isinstance(cart, dict):
                 cart = {}
+                
 
             pk = str(pk)  # keys must be strings for session
             if pk in cart:
@@ -39,11 +40,13 @@ class AddToCartView(View):
             else:
                 cart[pk] = 1
             request.session['cart'] = cart
+            # print(cart)
+          
             return redirect('cart')
 
 
 class CartView(TemplateView):
-    template_name = 'store/cart.html'
+    template_name = 'store/cart.html'  
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -85,7 +88,7 @@ class CustomLoginView(LoginView):
     template_name = 'store/login.html'
 
     def get_success_url(self):
-        if self.request.user.username == 'nuhu':
+        if self.request.user.username == 'Nuhuu':
             return reverse_lazy('product_create')
         return reverse_lazy('product_list')
 
@@ -98,5 +101,5 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.username != 'Nuhuu':
-            return HttpResponseForbidden("Only seller 'nuhuu' can create products.")
+            return HttpResponseForbidden("Only seller 'Nuhuu' can create products.")
         return super().dispatch(request, *args, **kwargs)
